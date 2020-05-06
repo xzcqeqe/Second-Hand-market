@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- 指定字符集 -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>商品详情</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body style="text-align: center;background-color: #5e5e5e">
+<div  class="container"style="width: 600px;margin-top: 20px;text-align: center;background-color: yellow;margin-left: 450px">
+
+    <form th:border="1" style="border-style: solid;text-align: center;background-color: white">
+        <div class="form-group">
+            <h3 style="text-align: center">商品详情信息</h3><hr style="border-color: #6f42c1">
+        </div>
+            <div class="form-group">
+                <h4  style="text-align: left" th:text="'商品名称  :'+${comDesc.getName()}">法拉利</h4><hr style="border-color: #6f42c1">
+            </div>
+        <div class="form-group">
+            <h4 style="text-align: left" th:text="'所属类型   :'+${comDesc.getCategory()}">车品</h4><hr style="border-color: #6f42c1">
+        </div>
+
+        <div class="form-group">
+            <h4 style="text-align: left" th:text="'商品价格  :'+${comDesc.getMoney()}">10000000.00</h4><hr style="border-color: #6f42c1">
+        </div>
+
+        <div class="form-group">
+            <h4 style="text-align: left" th:text="'商品详情  :'+${comDesc.getDes()}">没有详情</h4><hr style="border-color: #6f42c1">
+        </div>
+
+        <div class="form-group">
+            <h4 style="text-align: left" th:text="'地址  :'+${comDesc.getUser().getAddress()}">没有地址</h4><hr style="border-color: #6f42c1">
+        </div>
+        <div class="form-group">
+            <h4 style="text-align: left" th:text="'用户ID  :'+${comDesc.getUser().getUsername()}">844</h4><hr style="border-color: #6f42c1">
+        </div>
+        <div class="form-group">
+            <h5 style="text-align: left" th:text="${'联系方式  :'+comDesc.getUser().getTelephone()}">32323322</h5><hr style="border-color: #6f42c1">
+        </div>
+
+        <div class="form-group" style="text-align: center">
+<!--            <a style="text-align: center" type="button" class="btn btn-primary btn-default" href="/commodity/index">返回</a>-->
+            <a style="text-align: center" type="button" class="btn btn-primary btn-default"  th:href="@{/commodity/index(currentPage=${currentPage})}">返回</a>
+            <a style="text-align: center" type="button" class="btn btn-primary btn-default"  th:href="@{/commodity/buy(thisId=${comDesc.getId()})}">购买</a>
+        </div>
+    </form>
+
+</div>
+</body>
+</html>
+
+</body>
+</html>

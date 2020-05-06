@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>信息填写</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div  style="background-color:gainsboro;border-color: #5e5e5e;border: solid;margin-top: 70px;padding-bottom: 40px;margin-left: 300px;margin-right: 300px">
+    <div style="padding-left: 80px">
+    <form role="form" style="background-color: white;padding-bottom:20px;margin-right:70px;margin-top:40px;padding-left: 230px;padding-top: 30px;border: solid" th:action="@{/commodity/confirm(thisComId=${thisId})}" method="post" accept-charset="utf-8">
+        <div class="form-group">
+            <h3 style="padding-left: 100px">填写信息</h3>
+        </div>
+        <div class="form-group">
+            <label>联系人名称</label>
+            <input type="text" style="width: 250px;" class="form-control" th:value="${login_user.name}" name="o_buyer" placeholder="联系人">
+        </div>
+        <div class="form-group">
+            <label >请输入详细地址</label>
+            <input type="text" style="width: 250px;" class="form-control" id="address" th:value="${login_user.address}" placeholder="地址">
+        </div>
+        <div class="form-group">
+            <label>联系电话</label>
+            <input type="text" style="width: 250px;" class="form-control" id="phone" th:value="${login_user.getTelephone()}" placeholder="联系方式">
+        </div>
+        <div class="form-group">
+        <label >备注信息</label><br>
+            <textarea name="message" style="resize:none;"></textarea>
+        </div>
+        <input type="submit" class="btn btn-primary btn-default">
+                    <a type="button" class="btn btn-default bg-primary" th:href="@{/commodity/index(currentpage=1)}">取消</a>
+    </form>
+
+</div>
+
+</div>
+</body>
+</html>

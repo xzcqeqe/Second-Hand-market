@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <!-- 使用Edge最新的浏览器的渲染方式 -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- viewport视口：网页可以根据设置的宽度自动进行适配，在浏览器的内部虚拟一个容器，容器的宽度与设备的宽度相同。
+    width: 默认宽度与设备的宽度相同
+    initial-scale: 初始的缩放比，为1:1 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>北辰二手网</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style type="text/css">
+        td, th {
+            text-align: center;
+        }
+    </style>
+<script>
+
+
+</script>
+
+</head>
+<body style="background-color: white" >
+<div class="container">
+    <h3 style="text-align: center;font-weight: bolder;color:royalblue ">北辰二手网</h3>
+    <div style="float: left;">
+        <form style="padding-top: 20px" class="form-inline" href="#">
+            <div class="form-group">
+                <label for="exampleInputName2" style="font-weight: bolder;color:blueviolet">商品名称</label>
+                <input disabled="disabled" type="text" name="name"  class="form-control" id="exampleInputName2">
+            </div>
+            <div style="padding-left: 50px" class="form-group">
+                <label for="exampleInputName3" style="font-weight: bolder;color: blueviolet">类型</label>
+                <input disabled="disabled" type="text" name="category" class="form-control"
+                       id="exampleInputName3">
+            </div>
+
+            <div class="form-group" style="padding-left: 100px">
+            <button style="width: 70px;color: #0f0f0f;font-weight: bold"  type="submit" class="btn btn-default">查询</button>
+            </div>
+            <div class="form-group" style="margin-left:70px;color:#2aabd2;font-size:20px;font-weight: bold" th:text="${login_user.username}+'--欢迎您！'"></div>
+        </form>
+
+    </div>
+
+    <div style="float: right;margin: 5px;padding-top: 20px" >
+
+        <a class="btn btn-primary" th:href="@{'/commodity/add/'}">发布商品</a>
+        <a class="btn btn-primary" th:href="@{'/order/history/'+${login_user.u_id}}">购买记录</a>
+
+    </div>
+
+    <form id="form">
+        <table border="1" class="table table-bordered table-hover">
+            <tr class="success">
+                <th width="50px">序号</th>
+                <th>商品名称</th>
+                <th>所属类型</th>
+                <th>商品价格</th>
+                <th>操作</th>
+            </tr>
+                    <tr th:each="commodity,status:${pageCom.getList()}">
+                    <td th:text="${status.count}" style="font-weight: bolder;color:red;">4</td>
+                    <td th:text="${commodity.getName()}" style="font-weight: bolder;color:red">键盘</td>
+                    <td th:text="${commodity.getCategory()}" style="font-weight: bolder;color:red">其它</td>
+                    <td th:text="${commodity.getMoney()}" style="font-weight: bolder;color:red">50</td>
+                    <td width="150px"><a class="btn btn-sm btn-primary" th:href="@{/commodity/desc(currentPage=${pageCom.getCurrentPage()},thisId=${commodity.getId()})}">查看详情购买</a>&nbsp;
+                    </tr>
+        </table>
+    </form>
+
+<!--    分页-->
+    <ul class="pagination pagination-lg" >
+        <li th:class="${pageCom.getCurrentPage()==1}?'disabled' : ''"><a href="#">上一页</a>
+
+        <li th:if="${pageCom.getCurrentPage()>=4}"> <a th:href="@{/commodity/findByPage(currentPage=${pageCom.getCurrentPage()-3})}" th:text="${pageCom.getCurrentPage() -3}" >1</a></li>
+        <li th:if="${pageCom.getCurrentPage()>=3}"> <a th:href="@{/commodity/findByPage(currentPage=${pageCom.getCurrentPage()-2})}" th:text="${pageCom.getCurrentPage() -2}" >1</a></li>
+        <li th:if="${pageCom.getCurrentPage()>=2}"> <a th:href="@{/commodity/findByPage(currentPage=${pageCom.getCurrentPage()-1})}" th:text="${pageCom.getCurrentPage() -1}" >1</a></li>
+        </li>
+
+        <li class="active"><a href="#" th:text="${pageCom.getCurrentPage()}" >1</a></li>
+
+        <li th:if="${pageCom.getCurrentPage() le pageCom.getTotalPage()-1}" ><a th:href="@{/commodity/findByPage(currentPage=${pageCom.getCurrentPage()+1})}" th:text="${pageCom.getCurrentPage() +1}" >1</a></li>
+        <li th:if="${pageCom.getCurrentPage() le pageCom.getTotalPage()-2}" ><a th:href="@{/commodity/findByPage(currentPage=${pageCom.getCurrentPage()+2})}" th:text="${pageCom.getCurrentPage() +2}" >1</a></li>
+        <li th:if="${pageCom.getCurrentPage() le pageCom.getTotalPage()-3}" ><a th:href="@{/commodity/findByPage(currentPage=${pageCom.getCurrentPage()+3})}" th:text="${pageCom.getCurrentPage() +3}" >1</a></li>
+        <li th:class="${pageCom.getCurrentPage()==pageCom.getTotalPage()}?'disabled' : ''" ><a href="#">下一页</a></li>
+    </ul>
+    <br>
+    <span style="font-size:20px;margin-left: 5px;" th:text="'共'+${pageCom.getTotalCount()}+'条记录，共'+${pageCom.totalPage}+'页'">
+
+                </span>
+
+
+</div>
+<script>
+</script>
+</body>
+</html>

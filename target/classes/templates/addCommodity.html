@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description">
+    <meta name="author">
+    <title>添加商品</title>
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body class="text-center" style="background-color: #9acfea;text-align: center;padding-left: 350px">
+<form   style="width: 800px;background-color:tan; border-width: 3px;border-style: solid"  th:action="@{'/commodity/wait/'}" method="post">
+        <div class="form-group">
+            <h1 class="h3 mb-3 font-weight-normal" style="font-weight: bold">描述商品信息</h1>
+        </div><!--    <label class="sr-only">商品名称</label>-->
+       <div class="form-group">
+           <h4 style="text-align:left;font-weight:bolder">商品名称</h4>
+    <input type="text" name="name" class="form-control" placeholder="商品名称"  required="" autofocus="">
+       </div><hr>
+    <div class="form-group">
+        <h4 style="text-align: left;font-weight: bolder">商品类型&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <select style="width: 200px" name="category">
+        <option value="手机">手机</option>
+        <option value="数码">数码</option>
+        <option value="鞋靴">鞋靴</option>
+        <option value="百货">百货</option>
+        <option value="服装">服装</option>
+        <option value="运动">运动</option>
+        <option value="车品">车品</option>
+        <option value="其它">其它</option>
+    </select>
+        </h4>
+    </div><hr>
+    <div class="form-group">
+        <h4 style="text-align:left;font-weight:bolder">商品价格&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <input style="width: 200px" type="text" name="money" placeholder="价格"  required="" autofocus="">
+        </h4>
+    </div><hr>
+    <div class="form-group">
+        <h4 style="text-align:left;font-weight:bolder">详细介绍</h4>
+        <textarea name="des" style="resize:none;width: 400px;height: 150px;padding-left: 10px" placeholder="商品详情或转卖原因等"></textarea>
+    </div>
+        <div >
+    <input class="btn  btn-primary " type="submit">
+            <a class="btn  btn-primary" type="button" th:href="@{/commodity/index(currentPage=1)}">取消</a>
+        </div>
+
+    <p class="mt-5 mb-3 text-muted">© 2017-2018</p>
+
+</form>
+</body>
+
+</html>

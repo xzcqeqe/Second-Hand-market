@@ -1,0 +1,92 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>订单记录</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+      function deleteOrder(id) {
+          if(confirm("您确定要删除吗？")){
+              location.href="/order/delete?id="+id;
+          }
+            window.onload=function () {
+                document.getElementById("delSelected").onclick=function () {
+                    if(confirm("您确定要删除选中订单记录吗？")){
+                        var flag = false;
+                        //判断是否有选中条目
+                        var cbs = document.getElementsByName("uid");
+                        for (var i = 0; i < cbs.length; i++) {
+                            if (cbs[i].checked) {
+                                //有一个条目选中了
+                                flag = true;
+                                break;
+                            }
+                        }
+
+                        if (flag) {//有条目被选中
+                            //表单提交
+                            document.getElementById("form").submit();
+                        }
+
+                    }
+                }
+            }
+          //1.获取第一个cb
+          document.getElementById("#firstCb").onclick = function () {
+              //2.获取下边列表中所有的cb
+              var cbs = document.getElementsByName("uid");
+              //3.遍历
+              for (var i = 0; i < cbs.length; i++) {
+                  //4.设置这些cbs[i]的checked状态 = firstCb.checked
+                  cbs[i].checked = this.checked;
+              }
+
+          }
+      }
+    </script>
+</head>
+<body>
+
+<div class="container">
+    <h3 style="text-align: center">购买记录</h3>
+
+    <div style="float: right;margin: 5px;">
+
+        <a class="btn btn-primary" href="/commodity/index?currentPage=1">返回</a>
+        <a class="btn btn-primary" href="javascript:void(0);" id="delSelected">删除选中</a>
+
+    </div>
+
+    <form id="form" action="" method="post">
+        <table border="1" class="table table-bordered table-hover">
+            <tr class="success">
+                <th><input type="checkbox" id="firstCb"></th>
+                <th>编号</th>
+                <th>商品名称</th>
+                <th>商品价格</th>
+                <th>发货人</th>
+                <th>收货人</th>
+                <th>备注信息</th>
+                <th>购买时间</th>
+                <th>操作</th>
+            </tr>
+            </tr>
+            <tr th:each="orderList,status:${login_user.getOrderList()}">
+                <td><input type="checkbox" name="uid" th:value="${orderList.o_id}"></td>
+                <td th:text="${status.count}"></td>
+                <td th:text="${orderList.getO_name()}"></td>
+                <td th:text="${orderList.getO_money()}"></td>
+                <td th:text="${orderList.getO_seller()}"></td>
+                <td th:text="${orderList.getO_buyer()}"></td>
+                <td th:text="${orderList.getMessage()}"></td>
+                <td th:text="${orderList.getDate()}"></td>
+                <td width="70px">
+                        <a  class="btn btn-sm btn-primary"th:data-id="${orderList.o_id}" onclick="deleteOrder(this.getAttribute('data-id'))" type="button">删除</a>&nbsp;
+            </tr>
+        </table>
+    </form>
+
+</div>
+</body>
+</html>
