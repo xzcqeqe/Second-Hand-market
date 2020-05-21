@@ -41,7 +41,6 @@
                   //4.设置这些cbs[i]的checked状态 = firstCb.checked
                   cbs[i].checked = this.checked;
               }
-
           }
       }
     </script>
@@ -73,7 +72,7 @@
             </tr>
             </tr>
             <tr th:each="orderList,status:${login_user.getOrderList()}">
-                <td><input type="checkbox" name="uid" th:value="${orderList.o_id}"></td>
+                <td><input type="checkbox"  th:name="uid" th:value="${orderList.o_id}"></td>
                 <td th:text="${status.count}"></td>
                 <td th:text="${orderList.getO_name()}"></td>
                 <td th:text="${orderList.getO_money()}"></td>

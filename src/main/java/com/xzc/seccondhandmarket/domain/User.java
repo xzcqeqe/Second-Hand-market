@@ -31,15 +31,13 @@ public class User implements Serializable {
     private String address;
 
 
-//    @OneToMany(targetEntity = Commodity.class,fetch=FetchType.LAZY)
-//    @JoinColumn(name ="u_c_id" ,referencedColumnName = "u_id")
     @OneToMany(mappedBy = "user",fetch = FetchType.LAZY)
     private Set<Commodity> commodityList = new HashSet<>();//一个用户拥有多个商品
 
-    @OneToMany(mappedBy = "user",fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "user",fetch = FetchType.LAZY)
     private Set<Order> orderList = new HashSet<>();      //一个用户也可以有多个订单
 
-    @OneToMany(mappedBy = "user",fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "user",fetch = FetchType.LAZY)
     private Set<WaitCommodity> waitCommodities = new HashSet<>();//一个用户也可以有多个发布请求
 
     public Set<WaitCommodity> getWaitCommodities() {

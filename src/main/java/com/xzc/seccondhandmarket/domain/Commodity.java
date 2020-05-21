@@ -21,7 +21,6 @@ public class Commodity implements Serializable {
     @Column(name = "money")
     private Double money;
 
-//    private Integer uid;
 
     @ManyToOne(targetEntity = User.class,fetch = FetchType.EAGER)
     @JoinColumn(name = "u_c_id",referencedColumnName = "u_id")
@@ -53,14 +52,6 @@ public class Commodity implements Serializable {
     public void setId(Integer c_id) {
         this.c_id = c_id;
     }
-
-//    public Integer getUid() {
-//        return uid;
-//    }
-//
-//    public void setUid(Integer uid) {
-//        this.uid = uid;
-//    }
 
     public String getName() {
         return name;

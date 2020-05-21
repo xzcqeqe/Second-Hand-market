@@ -28,14 +28,14 @@
 <div class="container">
     <h3 style="text-align: center;font-weight: bolder;color:royalblue ">北辰二手网</h3>
     <div style="float: left;">
-        <form style="padding-top: 20px" class="form-inline" href="#">
+        <form style="padding-top: 20px" class="form-inline"  th:action="@{/commodity/findByPage(currentPage=${pageCom.getCurrentPage()})}" method="post" accept-charset="utf-8">
             <div class="form-group">
                 <label for="exampleInputName2" style="font-weight: bolder;color:blueviolet">商品名称</label>
-                <input disabled="disabled" type="text" name="name"  class="form-control" id="exampleInputName2">
+                <input  type="text" th:value="${condition.getName()}"  name="name"  class="form-control" id="exampleInputName2">
             </div>
             <div style="padding-left: 50px" class="form-group">
                 <label for="exampleInputName3" style="font-weight: bolder;color: blueviolet">类型</label>
-                <input disabled="disabled" type="text" name="category" class="form-control"
+                <input  type="text" th:value="${condition.getCategory()}" name="category" class="form-control"
                        id="exampleInputName3">
             </div>
 
@@ -77,22 +77,22 @@
     <ul class="pagination pagination-lg" >
         <li th:class="${pageCom.getCurrentPage()==1}?'disabled' : ''"><a href="#">上一页</a>
 
-        <li th:if="${pageCom.getCurrentPage()>=4}"> <a th:href="@{/commodity/findByPage(currentPage=${pageCom.getCurrentPage()-3})}" th:text="${pageCom.getCurrentPage() -3}" >1</a></li>
-        <li th:if="${pageCom.getCurrentPage()>=3}"> <a th:href="@{/commodity/findByPage(currentPage=${pageCom.getCurrentPage()-2})}" th:text="${pageCom.getCurrentPage() -2}" >1</a></li>
-        <li th:if="${pageCom.getCurrentPage()>=2}"> <a th:href="@{/commodity/findByPage(currentPage=${pageCom.getCurrentPage()-1})}" th:text="${pageCom.getCurrentPage() -1}" >1</a></li>
+        <li th:if="${pageCom.getCurrentPage()>=4}"> <a th:href="@{/commodity/findByPage(currentPage=${pageCom.getCurrentPage()-3},name=${condition.getName()},category=${condition.getCategory()})}" th:text="${pageCom.getCurrentPage() -3}" >1</a></li>
+        <li th:if="${pageCom.getCurrentPage()>=3}"> <a th:href="@{/commodity/findByPage(currentPage=${pageCom.getCurrentPage()-2},name=${condition.getName()},category=${condition.getCategory()})}" th:text="${pageCom.getCurrentPage() -2}" >1</a></li>
+        <li th:if="${pageCom.getCurrentPage()>=2}"> <a th:href="@{/commodity/findByPage(currentPage=${pageCom.getCurrentPage()-1},name=${condition.getName()},category=${condition.getCategory()})}" th:text="${pageCom.getCurrentPage() -1}" >1</a></li>
         </li>
 
         <li class="active"><a href="#" th:text="${pageCom.getCurrentPage()}" >1</a></li>
 
-        <li th:if="${pageCom.getCurrentPage() le pageCom.getTotalPage()-1}" ><a th:href="@{/commodity/findByPage(currentPage=${pageCom.getCurrentPage()+1})}" th:text="${pageCom.getCurrentPage() +1}" >1</a></li>
-        <li th:if="${pageCom.getCurrentPage() le pageCom.getTotalPage()-2}" ><a th:href="@{/commodity/findByPage(currentPage=${pageCom.getCurrentPage()+2})}" th:text="${pageCom.getCurrentPage() +2}" >1</a></li>
-        <li th:if="${pageCom.getCurrentPage() le pageCom.getTotalPage()-3}" ><a th:href="@{/commodity/findByPage(currentPage=${pageCom.getCurrentPage()+3})}" th:text="${pageCom.getCurrentPage() +3}" >1</a></li>
+        <li th:if="${pageCom.getCurrentPage() le pageCom.getTotalPage()-1}" ><a th:href="@{/commodity/findByPage(currentPage=${pageCom.getCurrentPage()+1},name=${condition.getName()},category=${condition.getCategory()})}" th:text="${pageCom.getCurrentPage() +1}" >1</a></li>
+        <li th:if="${pageCom.getCurrentPage() le pageCom.getTotalPage()-2}" ><a th:href="@{/commodity/findByPage(currentPage=${pageCom.getCurrentPage()+2},name=${condition.getName()},category=${condition.getCategory()})}" th:text="${pageCom.getCurrentPage() +2}" >1</a></li>
+        <li th:if="${pageCom.getCurrentPage() le pageCom.getTotalPage()-3}" ><a th:href="@{/commodity/findByPage(currentPage=${pageCom.getCurrentPage()+3},name=${condition.getName()},category=${condition.getCategory()})}" th:text="${pageCom.getCurrentPage() +3}" >1</a></li>
         <li th:class="${pageCom.getCurrentPage()==pageCom.getTotalPage()}?'disabled' : ''" ><a href="#">下一页</a></li>
     </ul>
     <br>
     <span style="font-size:20px;margin-left: 5px;" th:text="'共'+${pageCom.getTotalCount()}+'条记录，共'+${pageCom.totalPage}+'页'">
 
-                </span>
+    </span>
 
 
 </div>

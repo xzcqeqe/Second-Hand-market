@@ -35,7 +35,6 @@ public class OrderController {
     @RequestMapping("/delete")//删除选定的单个订单
     @Transactional
     public String deleteOrder(Integer id,ModelMap modelMap){
-        System.out.println(id);
         orderDao.deleteById(id);
         modelMap.addAttribute("result","您已经删除所选订单，即将为您跳转到主页 ");
         return "tiaozhuan";
